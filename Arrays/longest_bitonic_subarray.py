@@ -32,7 +32,7 @@ def find_longest_bitonic_array(list_of_numbers):
         max_bitonic_size = max(max_bitonic_size,
                                longest_increasing_ending_at_me[i] + longest_decreasing_starting_at_me[i])
 
-    return max_bitonic_size - 1
+    return max_bitonic_size - 1  # since k gets counted twice
 
 
 class TestLongestBitonic(unittest.TestCase):
