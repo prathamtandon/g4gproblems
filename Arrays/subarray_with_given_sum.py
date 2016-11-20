@@ -14,6 +14,10 @@ Approach:
 2. Keep moving end forward, and keep a running sum.
 3. When sum > desired sum, move start forward and keep removing from sum until sum becomes less than sum.
 4. Return start and end when running sum becomes equal to desired sum.
+NOTE: Its important to understand how the indices work. Start always points to start of subarray.
+End, however, points to element after the end of subarray. That's the reason, we return start, end-1.
+Also, inner while loop checks that start should not equal current end of subarray, which is actually end-1.
+This is needed to ensure the third test case listed below passes.
 """
 
 
@@ -21,7 +25,7 @@ def find_subarray_with_given_sum(list_of_numbers, sum):
     running_sum = list_of_numbers[0]
     start = 0
 
-    for end in range(1, len(list_of_numbers)):
+    for end in range(1, len(list_of_numbers)+1):
         while start < end-1 and running_sum > sum:
             running_sum -= list_of_numbers[start]
             start += 1
