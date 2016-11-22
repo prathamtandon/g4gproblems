@@ -47,3 +47,5 @@ class TestConsecutiveElements(unittest.TestCase):
         self.assertFalse(check_consecutive_only(list_of_numbers))
         list_of_numbers = [34, 23, 52, 12, 3]
         self.assertFalse(check_consecutive_only(list_of_numbers))
+        list_of_numbers = [5, 2, 3, 3, 1]
+        self.assertFalse(check_consecutive_only(list_of_numbers))
