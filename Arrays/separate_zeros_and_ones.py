@@ -23,9 +23,8 @@ def separate_zeros_and_ones(list_of_zeros_and_ones):
         while list_of_zeros_and_ones[left_most_one] == 0:
             left_most_one -= 1
         if left_most_one >= 0:
-            temp = list_of_zeros_and_ones[right_most_one]
-            list_of_zeros_and_ones[right_most_one] = list_of_zeros_and_ones[left_most_one]
-            list_of_zeros_and_ones[left_most_one] = temp
+            list_of_zeros_and_ones[right_most_one], list_of_zeros_and_ones[left_most_one] =\
+                list_of_zeros_and_ones[left_most_one], list_of_zeros_and_ones[right_most_one]
             right_most_one -= 1
             left_most_one -= 1
 
