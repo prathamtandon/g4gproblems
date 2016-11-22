@@ -12,8 +12,8 @@ Approach:
 2. Scan from left to right.
 3. Initialize leftSum to zero.
 4. leftSum = leftSum + arr[i]
-5. rightSum = sum - arr[i]
-6. If leftSum == rightSum, return i.
+5. total_sum = total_sum - arr[i]
+6. If leftSum == total_sum, return i.
 """
 
 
