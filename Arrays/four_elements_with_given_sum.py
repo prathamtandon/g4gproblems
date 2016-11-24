@@ -20,8 +20,9 @@ Approach 1:
 """
 Approach 2:
 1. Pre-compute the sum of all pair of elements in the array. Store this in an auxiliary array.
-2. For each element in auxiliary array, we can find the other pair in logN time using binary search.
+2. For each element in auxiliary array, we can find the other pair in log_n time using binary search.
 3. Now, once we have the two pairs, we can return the corresponding elements as the solution.
+4. Overall time complexity is O(n^2log_n) and space complexity is O(n^2)
 """
 
 
