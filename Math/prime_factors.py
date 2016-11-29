@@ -43,6 +43,7 @@ class TestPrimeFactors(unittest.TestCase):
     def test_prime_factors(self):
         self.assertEqual(prime_factors(12), [2, 2, 3])
         self.assertEqual(prime_factors(315), [3, 3, 5, 7])
+        self.assertEqual(prime_factors(1092), [2, 2, 3, 7, 13])
 
 
 
