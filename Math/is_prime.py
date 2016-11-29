@@ -1,3 +1,4 @@
+import unittest
 """
 Returns true if given number is prime.
 Introductory (school) method:
@@ -14,6 +15,9 @@ def is_prime(number):
     if number <= 3:
         return True
 
+    if number % 2 == 0 or number % 3 == 0:
+        return False
+
     i = 5
     while i * i <= number:
         if number % i == 0 or number % (i+2) == 0:
@@ -21,3 +25,10 @@ def is_prime(number):
         i += 6
 
     return True
+
+
+class TestPrimality(unittest.TestCase):
+
+    def test_is_prime(self):
+        self.assertTrue(is_prime(11))
+        self.assertFalse(is_prime(15))
