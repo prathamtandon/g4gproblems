@@ -7,7 +7,7 @@ Output: 180
 Input: -1 -3 -10 0 60
 Output: 60
 Input: -2 -3 0 -2 -40
-Output: -2 -40
+Output: 80
 """
 
 """

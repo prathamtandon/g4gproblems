@@ -12,7 +12,7 @@ Approach:
 1. Sort the numbers using a custom comparator.
 2. The comparator works as follows: suppose it takes two numbers X and Y.
 3. If XY > YX, it returns -1, elif XY < YX, it returns 1 else it returns 0. Remember, we need decreasing sort.
-4. For eg. suppose X = 60 and Y = 548. XY = 60548, YX = 54860. So, X should come before Y, hence return 1.
+4. For eg. suppose X = 60 and Y = 548. XY = 60548, YX = 54860. So, X should come before Y, hence return -1.
 """
 
 

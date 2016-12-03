@@ -45,11 +45,8 @@ def find_maximum_sum_subarray(list_of_numbers):
 def find_maximum_sum_circular_subarray(list_of_numbers):
 
     max_non_wrapped_sum = find_maximum_sum_subarray(list_of_numbers)
-    total_sum = 0
-
-    for i in range(len(list_of_numbers)):
-        total_sum += list_of_numbers[i]
-        list_of_numbers[i] = -list_of_numbers[i]
+    total_sum = sum(list_of_numbers)
+    list_of_numbers = [-x for x in list_of_numbers]
 
     # wrapped_sum = total_sum - (-max subarray sum of inverted array)
     max_wrapped_sum = total_sum + find_maximum_sum_subarray(list_of_numbers)

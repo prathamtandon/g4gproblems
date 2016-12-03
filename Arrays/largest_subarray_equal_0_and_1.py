@@ -13,7 +13,7 @@ Output: 0 to 3 OR 1 to 4
 """
 Approach:
 1. Scan the array from left to right.
-2. For each index i, compute the sum of 1s and 0s to its left, inclusive. Let's call this diff.
+2. For each index i, compute the difference between count of 1s and 0s to its left, inclusive.
 3. A subarray with same number of 0s and 1s will have the same diff value before subarray and after
    subarray, (as net difference within the subarray is zero).
 4. We have to find two diff values which are same and maximum distance apart. This can be done using a symbol table.
