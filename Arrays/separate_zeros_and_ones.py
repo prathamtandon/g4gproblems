@@ -15,18 +15,16 @@ Approach:
 
 
 def separate_zeros_and_ones(list_of_zeros_and_ones):
-    length = len(list_of_zeros_and_ones)
-    left_most_one = length - 1
-    right_most_one = length - 1
+    count_zero = 0
+    end = len(list_of_zeros_and_ones)
 
-    while left_most_one >= 0:
-        while list_of_zeros_and_ones[left_most_one] == 0:
-            left_most_one -= 1
-        if left_most_one >= 0:
-            list_of_zeros_and_ones[right_most_one], list_of_zeros_and_ones[left_most_one] =\
-                list_of_zeros_and_ones[left_most_one], list_of_zeros_and_ones[right_most_one]
-            right_most_one -= 1
-            left_most_one -= 1
+    for i in range(end):
+        if list_of_zeros_and_ones[i] == 0:
+            list_of_zeros_and_ones[count_zero] = 0
+            count_zero += 1
+
+    for i in range(count_zero, end):
+        list_of_zeros_and_ones[i] = 1
 
 
 class TestSegregate(unittest.TestCase):
