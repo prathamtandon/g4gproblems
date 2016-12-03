@@ -19,14 +19,17 @@ Approach:
 """
 
 
-def move_to_right(list_of_numbers):
-    destination = len(list_of_numbers) - 1
-    index = len(list_of_numbers) - 1
-    while index >= 0:
-        if list_of_numbers[index] is not None:
-            list_of_numbers[destination] = list_of_numbers[index]
-            destination -= 1
-        index -= 1
+def move_non_na_to_right(list_of_numbers):
+    # Uses similar logic to move zeros to end of list
+    end = len(list_of_numbers)
+    count_non_na = end - 1
+    for i in range(end - 1, -1, -1):
+        if list_of_numbers[i] is not None:
+            list_of_numbers[count_non_na] = list_of_numbers[i]
+            count_non_na -= 1
+
+    for i in range(count_non_na, -1, -1):
+        list_of_numbers[i] = None
 
 
 def merge_lists(larger_list, smaller_list):
@@ -45,7 +48,7 @@ def merge_lists(larger_list, smaller_list):
 
 
 def merge_smaller_into_larger(larger_list, smaller_list):
-    move_to_right(larger_list)
+    move_non_na_to_right(larger_list)
     merge_lists(larger_list, smaller_list)
 
 
