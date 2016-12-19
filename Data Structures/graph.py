@@ -24,6 +24,15 @@ class Graph:
                 w = next_edge[1]
                 self.add_edge(int(v), int(w))
 
+    def V(self):
+        return self.V
+
+    def E(self):
+        return self.E
+
+    def adj(self, v):
+        return self.adj[v]
+
     def add_edge(self, v, w):
         self.adj[v].append(w)
         self.adj[w].append(v)
