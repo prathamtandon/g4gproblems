@@ -13,6 +13,18 @@ Approach:
 3. Time complexity is O(n) and Space complexity is O(n).
 """
 
+"""
+Approach 2:
+1. Use a sliding window for the given array.
+2. Let left end of the window be wL and right end be wR.
+3. Let number of zeros inside the window be zeroCount.
+4. We maintain the window with at most m zeros inside.
+5. The main steps are:
+    a. While zeroCount is at most m, expand the window to the right (wR++) and update zeroCount.
+    b. While zeroCount exceeds m, shrink the window from left (wL++), update zeroCount.
+    c. Update the widest window along the way.
+"""
+
 
 def flip_zeros_to_maximize_ones(ones_and_zeros, m):
 
@@ -62,6 +74,38 @@ def flip_zeros_to_maximize_ones(ones_and_zeros, m):
     return zeros[max_index:max_index+m]
 
 
+def flip_zeros_sliding_window(ones_and_zeros, m):
+    window_left = 0
+    window_right = 0
+    zero_count = 0
+
+    best_window_size = 0
+    best_index = 0
+
+    while window_right < len(ones_and_zeros):
+        if zero_count <= m:
+            if ones_and_zeros[window_right] == 0:
+                zero_count += 1
+            window_right += 1
+        if zero_count > m:
+            if ones_and_zeros[window_left] == 0:
+                zero_count -= 1
+            window_left += 1
+        if window_right - window_left > best_window_size:
+            best_window_size = window_right - window_left
+            best_index = window_left
+
+    result = []
+    while len(result) < m:
+        if ones_and_zeros[best_index] == 0:
+            result.append(best_index)
+        best_index += 1
+        if best_index >= len(ones_and_zeros):
+            break
+
+    return result
+
+
 class TestFlips(unittest.TestCase):
 
     def test_flips(self):
@@ -71,3 +115,11 @@ class TestFlips(unittest.TestCase):
         self.assertEqual(flip_zeros_to_maximize_ones(ones_and_zeros, 1), [7])
         ones_and_zeros = [0, 0, 0, 1]
         self.assertEqual(flip_zeros_to_maximize_ones(ones_and_zeros, 4), [0, 1, 2])
+
+    def test_flips_sliding_window(self):
+        ones_and_zeros = [1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1]
+        self.assertEqual(flip_zeros_sliding_window(ones_and_zeros, 2), [5, 7])
+        ones_and_zeros = [1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1]
+        self.assertEqual(flip_zeros_sliding_window(ones_and_zeros, 1), [7])
+        ones_and_zeros = [0, 0, 0, 1]
+        self.assertEqual(flip_zeros_sliding_window(ones_and_zeros, 4), [0, 1, 2])
