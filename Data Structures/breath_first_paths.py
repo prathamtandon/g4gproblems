@@ -10,7 +10,7 @@ class BreadthFirstPaths:
         self.marked[self.s] = True
         queue = [self.s]
         self.edge_to[self.s] = self.s
-        while not len(queue) > 0:
+        while len(queue) > 0:
             v = queue.pop(0)
             for w in G.adj(v):
                 if not self.marked[w]:
