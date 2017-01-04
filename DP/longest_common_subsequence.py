@@ -17,6 +17,26 @@ def longest_common_subsequence(first_seq, second_seq):
             else:
                 aux[i][j] = max(aux[i-1][j], aux[i][j-1])
 
+    """
+    Extract LCS
+    """
+    lcs = [''] * aux[m][n]
+    i = m
+    j = n
+    k = len(lcs)-1
+    while i > 0 and j > 0:
+        if first_seq[i-1] == second_seq[j-1]:
+            lcs[k] = first_seq[i-1]
+            k -= 1
+            i -= 1
+            j -= 1
+        elif aux[i-1][j] > aux[i][j-1]:
+            i -= 1
+        else:
+            j -= 1
+
+    # print ''.join(lcs)
+
     return aux[m][n]
 
 
