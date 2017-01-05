@@ -10,10 +10,9 @@ Output: {1,1,1,1}, {1,1,2}, {2,2}, {1,3} so total 4 ways.
 def coin_change(N, S):
     ways = [0]*(N+1)
     ways[0] = 1
-    for s in S:
-        for i in range(1, N+1):
-            if i - s >= 0:
-                ways[i] += ways[i - s]
+    for i in range(len(S)):
+        for j in range(S[i], N+1):
+            ways[j] += ways[j - S[i]]
 
     return ways[N]
 
@@ -21,6 +20,6 @@ def coin_change(N, S):
 class TestCoinChange(unittest.TestCase):
 
     def test_coin_change(self):
-        S = [1, 2, 3]
+        S = [3, 2, 1]
         N = 4
         self.assertEqual(coin_change(N, S), 4)
