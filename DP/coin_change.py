@@ -7,6 +7,29 @@ Output: {1,1,1,1}, {1,1,2}, {2,2}, {1,3} so total 4 ways.
 """
 
 
+def coin_change_2(N, S):
+    num_denoms = len(S)
+    table = [[0] * num_denoms for _ in range(N+1)]
+    for j in range(num_denoms):
+        table[0][j] = 1
+
+    for i in range(1, N+1):
+        for j in range(num_denoms):
+            # x denotes number of ways for change for sum i including S[j]
+            # y denotes number of ways for change for sum i excluding S[j]
+            if i - S[j] >= 0:
+                x = table[i - S[j]][j]
+            else:
+                x = 0
+            if j > 0:
+                y = table[i][j-1]
+            else:
+                y = 0
+            table[i][j] = x + y
+
+    return table[N][num_denoms-1]
+
+
 def coin_change(N, S):
     ways = [0]*(N+1)
     ways[0] = 1
