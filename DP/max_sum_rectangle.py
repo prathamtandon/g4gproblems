@@ -57,10 +57,13 @@ def maximum_sum_rectangle(matrix):
     max_bottom = 0
 
     for left in range(num_cols):
+        # Initialize temp
         temp = [0] * num_rows
         for right in range(left, num_cols):
+            # temp[i] will store sum of all cells in row i between left and right.
             for i in range(num_rows):
                 temp[i] += matrix[i][right]
+            # find the best start and end rows for given left and right boundaries.
             running_sum, start, finish = kadane(temp)
             if running_sum > max_so_far:
                 max_so_far = running_sum
