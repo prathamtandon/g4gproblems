@@ -19,8 +19,8 @@ Approach:
     word_break(string, valid_words):
         n = len(string)
         for i in range(n):
-            if string[:i] in valid_words:
-                return word_break(string[i+1:], valid_words)
+            if string[:i] in valid_words and word_break(string[i+1:], valid_words):
+                    return True
         return False
 
 """

@@ -42,7 +42,7 @@ def min_insertions_to_make_palindrome(string):
                 else:
                     table[i][j] = 1 + min(table[i+1][j], table[i][j-1])
             elif L > 2:
-                table[i][j] = table[i-1][j+1]
+                table[i][j] = table[i+1][j-1]
 
     return table[0][n-1]
 

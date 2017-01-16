@@ -9,9 +9,9 @@ You can either pick an item or drop it (0-1 property).
 
 """
 Approach:
-Let KS[w][k] denote the maximum value in the knapsack with remaining capacity = w and number of
+Let KS[k][w] denote the maximum value in the knapsack with remaining capacity = w and number of
 items to chose from = k. Then,
-KS[w][k] = max(KS[w-wt[k]][k-1]+val[k], KS[w][k-1])
+KS[k][w] = max(KS[k-1][w-wt[k]]+val[k], KS[k-1][w])
 """
 
 

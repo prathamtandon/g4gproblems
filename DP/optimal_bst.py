@@ -32,14 +32,14 @@ def optimal_bst_bottom_up(keys, freq):
             rest_cost = sum(freq[i:j + 1])
             # k denotes the root node for the range i...j
             for k in range(i, j+1):
-                if k > i:
-                    left_cost = cost[i][k-1]
-                else:
+                if k == i:  # root is leftmost node
                     left_cost = 0
-                if k < j:
-                    right_cost = cost[k+1][j]
                 else:
+                    left_cost = cost[i][k-1]
+                if k == j:  # root is rightmost node
                     right_cost = 0
+                else:
+                    right_cost = cost[k+1][j]
                 cost[i][j] = min(cost[i][j], left_cost + right_cost + rest_cost)
 
     return cost[0][n-1]
