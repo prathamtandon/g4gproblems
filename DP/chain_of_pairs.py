@@ -10,9 +10,10 @@ Output: 3, chain is (5,24),(27,40),(50,90)
 
 
 def chain_of_pairs(pairs):
-    # This is similar to finding LCS where sequence is given pairs.
+    pairs = sorted(pairs, cmp=pair_comparator)
+    # This is similar to finding LIS where sequence is given pairs.
     n = len(pairs)
-    # table[i] denotes length of LCS ending in pairs[i].
+    # table[i] denotes length of LIS ending in pairs[i].
     table = [1] * n
     for i in range(1, n):
         for j in range(i):
@@ -34,5 +35,4 @@ class TestChainOfPairs(unittest.TestCase):
 
     def test_chain_of_pairs(self):
         pairs = [[5, 24], [39, 60], [15, 28], [27, 40], [50, 90]]
-        pairs = sorted(pairs, cmp=pair_comparator)
         self.assertEqual(chain_of_pairs(pairs), 3)

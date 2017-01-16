@@ -22,6 +22,8 @@ def matrix_chain_multiplication(dimensions):
         for i in range(1, len(dimensions)-chain_length+1):
             j = i+chain_length-1
             for k in range(i, j):
+                # The third value in sum below corresponds to number of multiplications in matrix
+                # obtained by multiplying A[i...k] and matrix obtained by multiplying A[k+1...j]
                 table[i][j] = min(table[i][j],
                                   table[i][k] + table[k+1][j] + dimensions[i-1]*dimensions[k]*dimensions[j])
 

@@ -11,10 +11,9 @@ def count_ways(n, m):
     ways[1] = 1
 
     for i in range(2, n+1):
-        j = 1
-        while j <= m and j <= i:
-            ways[i] += ways[i-j]
-            j += 1
+        for j in range(1, m+1):
+            if i-j >= 0:
+                ways[i] += ways[i-j]
 
     return ways[n]
 

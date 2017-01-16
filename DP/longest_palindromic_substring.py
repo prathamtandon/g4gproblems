@@ -8,6 +8,8 @@ Output: geeksskeeg
 
 def longest_palindromic_substring(string):
     n = len(string)
+    # table[i][j] is the length of palindromic substring starting at str[i] and ending at str[j].
+    # The max value in the table is the final result.
     table = [[0] * n for _ in range(n)]
     for i in range(n):
         table[i][i] = 1
