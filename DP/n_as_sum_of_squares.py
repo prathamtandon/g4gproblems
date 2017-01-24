@@ -23,9 +23,35 @@ def n_as_sum_of_squares(n):
     return ways[n]
 
 
+def n_as_sum_of_integers(n):
+    smaller = [x for x in range(1, n)]
+    # table[i][j] stores number of ways to denote i as sum of integers using only smaller[0...j]
+    # table[n][len(smaller)-1] stores the final result.
+    table = [[0] * len(smaller) for _ in range(n+1)]
+
+    for i in range(len(smaller)):
+        table[0][i] = 1
+
+    for i in range(1, n+1):
+        for j in range(len(smaller)):
+            if i - smaller[j] >= 0:
+                table[i][j] += table[i - smaller[j]][j]
+            if j > 0:
+                table[i][j] += table[i][j-1]
+
+    return table[n][len(smaller)-1]
+
+
 class TestSumOfSquares(unittest.TestCase):
 
     def test_sum_of_squares(self):
         self.assertEqual(n_as_sum_of_squares(4), 2)
         self.assertEqual(n_as_sum_of_squares(5), 2)
         self.assertEqual(n_as_sum_of_squares(16), 8)
+
+
+class TestSumOfInts(unittest.TestCase):
+
+    def test_sum_of_ints(self):
+        self.assertEqual(n_as_sum_of_integers(5), 6)
+        self.assertEqual(n_as_sum_of_integers(4), 4)
