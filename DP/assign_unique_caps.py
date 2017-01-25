@@ -28,23 +28,25 @@ MOD = 1000000007
 NUM_CAPS = 100
 
 
-def caps(mask, n, i, table, cap_list):
+def cap_assignment(mask, num_persons, cap_id, table, cap_list):
 
-    if mask == ((1 << n) - 1):
+    if mask == ((1 << num_persons) - 1):
         return 1
-    if i > NUM_CAPS:
+    if cap_id > NUM_CAPS:
         return 0
-    if table[mask][i] != -1:
-        return table[mask][i]
+    if table[mask][cap_id] != -1:
+        return table[mask][cap_id]
 
-    ways = caps(mask, n, i+1, table, cap_list)
-    for j in cap_list[i]:
+    # excluding current cap_id
+    ways = cap_assignment(mask, num_persons, cap_id + 1, table, cap_list)
+    for j in cap_list[cap_id]:
         if mask & (1 << j):
             continue
-        ways += caps(mask | (1 << j), n, i+1, table, cap_list)
+        # including current cap_id with assignments to all possible persons who own it.
+        ways += cap_assignment(mask | (1 << j), num_persons, cap_id + 1, table, cap_list)
         ways %= MOD
 
-    table[mask][i] = ways
+    table[mask][cap_id] = ways
     return ways
 
 
@@ -54,10 +56,11 @@ class TestCapAssignments(unittest.TestCase):
         n = 3
         table = [[-1] * (NUM_CAPS+1) for _ in range(1 << n)]
         cap_list = [[] for _ in range(NUM_CAPS+1)]
+        # cap_list[j] is list of all persons (0 indexed) who possess cap j for j = 1,...,100
         cap_list[1] = [0]
         cap_list[2] = [1]
         cap_list[5] = [0, 2]
         cap_list[100] = [0, 2]
 
-        self.assertEqual(caps(0, n, 1, table, cap_list), 4)
+        self.assertEqual(cap_assignment(0, n, 1, table, cap_list), 4)
 
