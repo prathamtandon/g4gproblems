@@ -7,7 +7,7 @@ Input: 15 4 15
 Output: 0
 Input: 1 4 5 1
 Output: 1 (merging 4 and 5)
-Input: 11, 14, 15, 99
+Input: 11 14 15 99
 Output: 3 (all adjacent elements have to be merged to get a single element at the end).
 """
 
