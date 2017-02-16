@@ -44,13 +44,12 @@ def find_max_subarray_equal_0_and_1(list_of_zeros_and_ones):
     for i in range(len(difference_list)):
         difference_val = difference_list[i]
         if difference_val in difference_table:
-            pair = difference_table[difference_val]
-            pair[1] = i
-            if max_length < pair[1] - pair[0]:
-                max_length = pair[1] - pair[0]
-                max_length_indices = [pair[0], pair[1]-1]
+            j = difference_table[difference_val]
+            if max_length < i - j:
+                max_length = i - j
+                max_length_indices = [j, i-1]
         else:
-            difference_table[difference_val] = [i, -1]
+            difference_table[difference_val] = i
 
     return max_length_indices
 
