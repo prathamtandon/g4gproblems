@@ -15,7 +15,7 @@ Approach:
 3. The difference of prefix sums at start and end will be the same. This is because the span has same
    sum in both the arrays and hence, does not change the difference from start to end.
 4. Since both binary arrays are of same length, difference in sums can vary from -n to n ie 2n+1 values.
-5. If prefix difference is zero, then max_length is current_index+1.
+5. If prefix difference is zero, then max_length is current_index+1 # span goes from 0 to current_index+1
 6. If prefix difference is encountered for first time, we store the current_index.
 7. If prefix difference is encountered before, we compute difference between stored value and current_index.
 """
