@@ -13,63 +13,55 @@ Output: 2
 We can get 3 1 5 4 6 2 by swapping 5 & 6 and 6 & 1
 """
 
+"""
+Approach:
+1. Start scanning from left to right.
+2. If first and second, already form a pair, then recur for the remaining list of numbers.
+3. Else return the minimum of following two cases:
+    a. Recur after swapping first with element that forms pair with second.
+    b. Recur after swapping second with element that forms pair with first.
+"""
+
 
 def min_swaps_required(list_of_numbers, list_of_pairs):
-    return min_swaps_required_helper(list_of_numbers, list_of_pairs, 0, [])
+    return min_swaps_required_helper(list_of_numbers, list_of_pairs, 0)
 
 
-def min_swaps_required_helper(list_of_numbers, list_of_pairs, swaps_so_far, swapped_indices):
-    if len(list_of_pairs) == 0:
-        return swaps_so_far
-    list_of_pairs = list_of_pairs[:]
-    cur_pair = list_of_pairs.pop(0)
-    i = list_of_numbers.index(cur_pair[0])
-    j = list_of_numbers.index(cur_pair[1])
-    if abs(i - j) != 1:
-        min_swaps = float('inf')
-        if i-1 >= 0 and i-1 not in swapped_indices and j not in swapped_indices:
-            temp = list_of_numbers[:]
-            temp[i-1], temp[j] = temp[j], temp[i-1]
-            swapped_indices = swapped_indices[:]
-            swapped_indices.append(i-1)
-            swapped_indices.append(i)
-            min_swaps = min(min_swaps, min_swaps_required_helper(temp,
-                                                                 list_of_pairs,
-                                                                 swaps_so_far + 1,
-                                                                 swapped_indices))
-        if i+1 < len(list_of_numbers) and i+1 not in swapped_indices and j not in swapped_indices:
-            temp = list_of_numbers[:]
-            temp[i+1], temp[j] = temp[j], temp[i+1]
-            swapped_indices = swapped_indices[:]
-            swapped_indices.append(i+1)
-            swapped_indices.append(i)
-            min_swaps = min(min_swaps, min_swaps_required_helper(temp,
-                                                                 list_of_pairs,
-                                                                 swaps_so_far + 1,
-                                                                 swapped_indices))
-        if j-1 >= 0 and j-1 not in swapped_indices and i not in swapped_indices:
-            temp = list_of_numbers[:]
-            temp[j-1], temp[i] = temp[i], temp[j-1]
-            swapped_indices = swapped_indices[:]
-            swapped_indices.append(j)
-            swapped_indices.append(j-1)
-            min_swaps = min(min_swaps, min_swaps_required_helper(temp,
-                                                                 list_of_pairs,
-                                                                 swaps_so_far + 1,
-                                                                 swapped_indices))
-        if j+1 < len(list_of_numbers) and j+1 not in swapped_indices and i not in swapped_indices:
-            temp = list_of_numbers[:]
-            temp[j+1], temp[i] = temp[i], temp[j+1]
-            swapped_indices = swapped_indices[:]
-            swapped_indices.append(j)
-            swapped_indices.append(j+1)
-            min_swaps = min(min_swaps, min_swaps_required_helper(temp,
-                                                                 list_of_pairs,
-                                                                 swaps_so_far + 1,
-                                                                 swapped_indices))
-        return min_swaps
+def forms_pair(ele1, ele2, list_of_pairs):
+    for pair in list_of_pairs:
+        if pair[0] == ele1 and pair[1] == ele2 or pair[0] == ele1 and pair[1] == ele2:
+            return True
+    return False
+
+
+def swap_in_list(list_of_numbers, start_index, one_from_pair, dest_index, list_of_pairs):
+    second_from_pair = 0
+    for pair in list_of_pairs:
+        if pair[0] == one_from_pair:
+            second_from_pair = pair[1]
+        elif pair[1] == one_from_pair:
+            second_from_pair = pair[0]
+    found = -1
+    for i in range(start_index, len(list_of_numbers)):
+        if list_of_numbers[i] == second_from_pair:
+            found = i
+            break
+    list_of_numbers[found], list_of_numbers[dest_index] = list_of_numbers[dest_index], list_of_numbers[found]
+    return list_of_numbers
+
+
+def min_swaps_required_helper(list_of_numbers, list_of_pairs, index):
+    if index >= len(list_of_numbers):
+        return 0
+    cur = list_of_numbers[index]
+    next = list_of_numbers[index + 1]
+    if forms_pair(cur, next, list_of_pairs):
+        return min_swaps_required_helper(list_of_numbers, list_of_pairs, index + 2)
     else:
-        return swaps_so_far
+        list1 = swap_in_list(list_of_numbers[:], index+2, list_of_numbers[index], index+1, list_of_pairs)
+        list2 = swap_in_list(list_of_numbers[:], index+2, list_of_numbers[index+1], index, list_of_pairs)
+        return 1 + min(min_swaps_required_helper(list1, list_of_pairs, index + 2),
+                       min_swaps_required_helper(list2, list_of_pairs, index + 2))
 
 
 class TestMinSwaps(unittest.TestCase):
