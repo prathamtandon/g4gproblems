@@ -11,7 +11,7 @@ Approach:
 1. Find the remainders of dividing each integer by 3.
 2. Integers can form a group, if the sum of their respective remainders is a multiple of 3.
 3. Create a hash table of different possible remainders of dividing integers by 3 (namely, 0, 1 and 2), whose
-value is the count of integers from the list whose with that remainder.
+value is the count of integers from the list with that remainder.
 NOTE: C(n,r) is the combinatorics function.
 4. For groups of 2, we have two possibilities:
 (a) C(hash_table[0],2)
@@ -33,7 +33,7 @@ def n_c_3(n):
     return n * (n - 1) * (n - 2) / 6
 
 
-def calculate_remainder_table(list_of_numbers, divisor):
+def create_remainder_table(list_of_numbers, divisor):
     remainder_table = {}
     for number in list_of_numbers:
         remainder = number % divisor
@@ -62,7 +62,7 @@ def calculate_3_groups_count(remainder_table):
 def count_groups_with_sum_as_multiple_of_3(list_of_numbers):
 
     group_count = 0
-    remainder_table = calculate_remainder_table(list_of_numbers, 3)
+    remainder_table = create_remainder_table(list_of_numbers, 3)
     group_count += calculate_2_groups_count(remainder_table)
     group_count += calculate_3_groups_count(remainder_table)
 
