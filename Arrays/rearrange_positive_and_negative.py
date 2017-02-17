@@ -27,7 +27,7 @@ def rearrage_positive_and_negative(list_of_numbers):
     pos_index = i + 1
     neg_index = 0
 
-    while pos_index < len(list_of_numbers) and neg_index < pos_index and list_of_numbers[neg_index] < 0:
+    while neg_index < pos_index < len(list_of_numbers) and list_of_numbers[neg_index] < 0:
         list_of_numbers[pos_index], list_of_numbers[neg_index] = list_of_numbers[neg_index],\
                                                                  list_of_numbers[pos_index]
         pos_index += 1
