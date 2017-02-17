@@ -30,3 +30,18 @@ def reorder(list_of_numbers, indices):
             indices[i] = old_target_index
             list_of_numbers[i] = old_target_element
 
+
+def reorder_2(list_of_numbers, indices):
+    for i in range(len(list_of_numbers)):
+        j = i
+        temp = list_of_numbers[i]
+        while indices[j] != i:
+            target_index = indices[j]
+            list_of_numbers[j] = list_of_numbers[target_index]
+            indices[j] = j
+            j = target_index
+        list_of_numbers[j] = temp
+        indices[j] = j
+
+
+
