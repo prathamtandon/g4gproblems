@@ -19,12 +19,15 @@ and temp[i] are even or both are odd.
 
 def subarrays_with_even_sum(list_of_nums):
 
-    sum_count = [1, 0]  # sum[0] is even count and sum[1] is odd counts
+    sum_count = [1, 0]  # sum_count[0] is even count and sum_count[1] is odd counts
     sum_val = 0
 
     for i in range(len(list_of_nums)):
-        sum_val = ((sum_val + list_of_nums[i] % 2) + 2) % 2  # plus 2 is to handle odd values
-        sum_count[sum_val] += 1
+        sum_val = sum_val + list_of_nums[i]
+        if sum_val % 2 == 0:
+            sum_count[0] += 1
+        else:
+            sum_count[1] += 1
 
     return sum_count[0] * (sum_count[0] - 1) / 2 + sum_count[1] * (sum_count[1] - 1) / 2
 
