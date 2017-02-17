@@ -11,10 +11,10 @@ def assembly_line(time_spent_at_station, time_spent_on_switch, entry, exit):
     table2[1] = entry[1] + time_spent_at_station[1][0]
 
     for i in range(2, n+1):
-        table1[i] = min(time_spent_at_station[0][i-1] + table1[i-1],
-                        time_spent_on_switch[1][i-1] + time_spent_at_station[0][i-1] + table2[i-1])
-        table2[i] = min(time_spent_at_station[1][i-1] + table2[i-1],
-                        time_spent_on_switch[0][i-1] + time_spent_at_station[1][i-1] + table1[i-1])
+        table1[i] = min(table1[i-1] + time_spent_at_station[0][i-1],
+                        table2[i-1] + time_spent_on_switch[1][i-1] + time_spent_at_station[0][i-1])
+        table2[i] = min(table2[i-1] + time_spent_at_station[1][i-1],
+                        table1[i-1] + time_spent_on_switch[0][i-1] + time_spent_at_station[1][i-1])
 
     return min(table1[n] + exit[0], table2[n] + exit[1])
 
