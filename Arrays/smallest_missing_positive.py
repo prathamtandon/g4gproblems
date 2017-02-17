@@ -18,17 +18,13 @@ Approach:
 
 
 def shift_negatives_to_right(list_of_numbers):
-    last_positive_index = len(list_of_numbers) - 1
-    runner = last_positive_index
+    i = -1
+    for j in range(len(list_of_numbers)):
+        if list_of_numbers[j] > 0:
+            i += 1
+            list_of_numbers[i], list_of_numbers[j] = list_of_numbers[j], list_of_numbers[i]
 
-    while runner >= 0:
-        if list_of_numbers[runner] < 0:
-            list_of_numbers[runner], list_of_numbers[last_positive_index] = \
-                list_of_numbers[last_positive_index], list_of_numbers[runner]
-            last_positive_index -= 1
-        runner -= 1
-
-    return last_positive_index
+    return i
 
 
 def find_smallest_missing_positive(list_of_numbers):
