@@ -14,14 +14,9 @@ def max_sum_increasing_subsequence(arr):
         table[i] = arr[i]
 
     for i in range(1, n):
-        max_so_far = -float('inf')
-        max_index = -1
         for j in range(i):
-            if max_so_far < arr[j] < arr[i]:
-                max_so_far = arr[j]
-                max_index = j
-        if max_index != -1:
-            table[i] += table[max_index]
+            if arr[j] < arr[i] and table[i] < table[j] + arr[i]:
+                table[i] = table[j] + arr[i]
 
     return max(table)
 
