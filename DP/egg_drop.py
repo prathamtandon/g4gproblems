@@ -16,6 +16,8 @@ egg_drop[n][k] = 1 + min(max(egg_drop[n-1][x-1], egg_drop[n][k-x]) for x in [1,2
 
 
 def egg_drop(num_eggs, num_floors):
+    # table[i][j] denotes number of drops needed in WORST CASE with i eggs and j floors.
+    # table[n][k] stores the final result.
     table = [[float('inf')] * (num_floors + 1) for _ in range(num_eggs + 1)]
 
     #  We need 1 drop for 1st floor and 0 drops for 0 floors
