@@ -7,21 +7,18 @@ import unittest
 
 
 def min_jumps_to_reach_end(jumps):
-    end = len(jumps)
-    # Let costs[i] define the min jumps needed from arr[i] to last element.
-    costs = [float('inf') for _ in range(end)]
-    last_index = end-1
-    costs[last_index] = 0
+    n = len(jumps)
+    # Let costs[i] define the min jumps needed to reach arr[i] from start of array.
+    costs = [float('inf') for _ in range(n)]
+    costs[0] = 0
 
-    for i in range(last_index-1, -1, -1):
-        for j in range(jumps[i]):
-            if i+j+1 <= last_index:
-                costs[i] = min(costs[i], costs[i+j+1])
-            else:
-                break
+    for i in range(1, n):
+        for j in range(i):
+            if jumps[j] >= i-j:
+                costs[i] = min(costs[i], costs[j])
         costs[i] += 1
 
-    return costs[0]
+    return costs[n-1]
 
 
 class TestMinJumps(unittest.TestCase):
