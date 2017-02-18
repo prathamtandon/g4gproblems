@@ -37,7 +37,7 @@ def longest_arithmetic_progression_simple(arr):
 
 
 def longest_arithmetic_progression(arr):
-
+    arr = sorted(arr)
     n = len(arr)
     # table[i][j] stores the length of longest AP having arr[i] and arr[j] as the first two elements.
     # The final result is the maximum value stored in table.
@@ -79,7 +79,7 @@ class TestLongestAP(unittest.TestCase):
         self.assertEqual(longest_arithmetic_progression(arr), 3)
         arr = [5, 10, 15, 20, 25, 30]
         self.assertEqual(longest_arithmetic_progression(arr), 6)
-        arr = [1, 7, 10, 13, 14, 19]
+        arr = [1, 7, 10, 14, 13, 19]
         self.assertEqual(longest_arithmetic_progression(arr), 4)
 
 
