@@ -23,9 +23,8 @@ and try a new color in case none of the assignments is safe.
 def is_safe(graph, vertex_to_check, color, assigned):
     V = len(graph)
     for vertex in range(V):
-        if vertex != vertex_to_check and graph[vertex][vertex_to_check] == 1:
-            if assigned == color[vertex]:
-                return False
+        if graph[vertex][vertex_to_check] == 1 and assigned == color[vertex]:
+            return False
 
     return True
 
