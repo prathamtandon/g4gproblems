@@ -11,23 +11,23 @@ Higher k => greater accuracy.
 from random import randint
 
 
-# Computes num^exponent % p in O(log(exponent)) time complexity.
-# If y == 0: return 1
-# If y % 2 == 0:
-# return a^(y/2) * a^(y/2)
-# else return a * a^(y/2) * a^(y/2)
-def modular_exponent(num, exponent, p):
+# Computes (a ** n) % p in O(log(n)) time complexity.
+# If n == 0: return 1
+# If n % 2 == 0:
+# return a^(n/2) * a^(n/2)
+# else return a * a^(n/2) * a^(n/2)
+def modular_exponent(a, n, p):
     result = 1
-    num = num % p
+    a = a % p
 
-    while exponent > 0:
+    while n > 0:
         # If exponent is odd, multiply result with num
-        if exponent & 1 > 0:
-            result = (result * num) % p
+        if n % 2 != 0:
+            result = (result * a) % p
 
         # Exponent must be even now
-        exponent /= 2
-        num = (num * num) % p
+        n /= 2
+        a = (a * a) % p
 
     return result
 
