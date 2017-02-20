@@ -16,18 +16,18 @@ That is, even when characters match, we may include the match or exlclude the ma
 """
 
 
-def distinct_subsequences(A, B, i, j, table={}):
-    if j == 0:
+def distinct_subsequences(A, B, n, m, table={}):
+    if m == 0:
         return 1
-    if j > i:
+    if n == 0:
         return 0
-    key = A[:i] + B[:j]
+    key = A[:n] + B[:m]
     if key in table:
         return table[key]
-    if A[i-1] == B[j-1]:
-        result = distinct_subsequences(A, B, i-1, j-1) + distinct_subsequences(A, B, i-1, j)
+    if A[n-1] == B[m-1]:
+        result = distinct_subsequences(A, B, n - 1, m - 1) + distinct_subsequences(A, B, n - 1, m)
     else:
-        result = distinct_subsequences(A, B, i-1, j)
+        result = distinct_subsequences(A, B, n - 1, m)
     table[key] = result
     return result
 
@@ -38,6 +38,9 @@ class TestDistinctSubsequences(unittest.TestCase):
         A = 'rabbbit'
         B = 'rabbit'
         self.assertEqual(distinct_subsequences(A, B, len(A), len(B)), 3)
+        A = 'geeksforgeeks'
+        B = 'ge'
+        self.assertEqual(distinct_subsequences(A, B, len(A), len(B)), 6)
         A = 'uwnny'
         B = 'uwnny'
         self.assertEqual(distinct_subsequences(A, B, len(A), len(B)), 1)
