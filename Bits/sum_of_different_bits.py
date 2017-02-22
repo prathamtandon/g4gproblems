@@ -37,4 +37,6 @@ class TestSumDifferentBits(unittest.TestCase):
     def test_sum_different_bits(self):
         arr = [1, 3, 5]
         self.assertEqual(sum_of_different_bits(arr), 8)
+        arr = [1, 2]
+        self.assertEqual(sum_of_different_bits(arr), 4)
 
