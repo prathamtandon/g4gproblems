@@ -14,6 +14,15 @@ Approach:
    root of min-heap. If greater than root, then swap and heapify. At the end, min-heap will contain the k
    largest elements.
 3. Below we have implementation of Order-statistics with randomization.
+
+NOTE: Same can also be achieved using a BST in which every node stores the number of nodes in its left subtree.
+If k == left_count+1:
+    return current_node
+elif k < left_count:
+    current_node = current_node.left
+else:
+    k = k - (left_count+1)
+    current_node = current_node.right
 """
 
 
