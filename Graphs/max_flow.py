@@ -69,6 +69,6 @@ class TestMaxFlow(unittest.TestCase):
              [0, 4, 0, 0, 14, 0],
              [0, 0, 9, 0, 0, 20],
              [0, 0, 0, 7, 0, 4],
-             [0, 0, 0, 0, 0, 0]
+             [0, 0, 0, 0, 0, 1]
              ]
         self.assertEqual(max_flow(G, 0, 5), 23)
