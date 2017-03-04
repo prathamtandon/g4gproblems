@@ -43,3 +43,4 @@ class TestLongestBalanced(unittest.TestCase):
         self.assertEqual(longest_balanced('()'), 2)
         self.assertEqual(longest_balanced('(((()'), 2)
         self.assertEqual(longest_balanced(')()()'), 4)
+        self.assertEqual(longest_balanced('((()))(()'), 6)
