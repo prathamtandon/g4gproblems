@@ -33,7 +33,7 @@ def check_consecutive_only(list_of_numbers):
             return False
         list_of_numbers[index] = -list_of_numbers[index]
 
-    return True
+    return len([x for x in list_of_numbers if x > 0]) == 0
 
 
 class TestConsecutiveElements(unittest.TestCase):
