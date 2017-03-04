@@ -5,7 +5,7 @@ the nodes may be absent from the tree.
 
 
 class Node:
-    def __init__(self, key, left, right):
+    def __init__(self, key, left=None, right=None):
         self.key = key
         self.left = left
         self.right = right
