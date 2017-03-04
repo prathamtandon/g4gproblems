@@ -23,12 +23,12 @@ Hence, v is an articulation point.
 """
 
 
-def articulation_points_helper(G, u, ap, parent, visited, entry_time, reachable_ancestor_time, time):
+def articulation_points_helper(G, u, ap, parent, visited, entry_time, reachable_ancestor_time):
 
     children = 0
-    time[0] += 1
-    entry_time[u] = time[0]
-    reachable_ancestor_time[u] = time[0]
+    articulation_points_helper.time += 1
+    entry_time[u] = articulation_points_helper.time
+    reachable_ancestor_time[u] = articulation_points_helper.time
     visited[u] = True
     V = len(G)
 
@@ -38,7 +38,7 @@ def articulation_points_helper(G, u, ap, parent, visited, entry_time, reachable_
                 # u-v is a tree edge in DFS tree, so increment children count by 1.
                 children += 1
                 parent[v] = u
-                articulation_points_helper(G, v, ap, parent, visited, entry_time, reachable_ancestor_time, time)
+                articulation_points_helper(G, v, ap, parent, visited, entry_time, reachable_ancestor_time)
                 reachable_ancestor_time[u] = min(reachable_ancestor_time[u], reachable_ancestor_time[v])
                 # check for condition 1
                 if parent[u] == -1 and children > 1:
@@ -59,11 +59,11 @@ def articulation_points(G):
     entry_time = [0] * V
     reachable_ancestor_time = [0] * V
     ap = [False] * V
-    time = [0]
+    articulation_points_helper.time = 0
 
     for u in range(V):
         if not visited[u]:
-            articulation_points_helper(G, u, ap, parent, visited, entry_time, reachable_ancestor_time, time)
+            articulation_points_helper(G, u, ap, parent, visited, entry_time, reachable_ancestor_time)
 
     return ap
 
