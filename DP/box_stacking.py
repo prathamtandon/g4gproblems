@@ -15,8 +15,8 @@ is a box with dimensions: 1 x 2 x 3, then we have three instances of it:
 (b) height = 2 and base = (1 x 3)
 (c) height = 3 and base = (1 x 2)
 For simplicity we will assume that width <= depth.
-Now, we sort the boxes in increasing order of their base ie (w1, d1) will come before (w2, d2) iff w1 < w2 and
-d1 < d2. Given this sequence, for each box, we find the longest increasing sub-sequence ending in that box.
+Now, we sort the boxes in increasing order of their base area ie (w1, d1) will come before (w2, d2) iff w1*d1 <
+w2*d2. Given this sequence, for each box, we find the longest increasing sub-sequence ending in that box.
 Length of a sub-sequence = sum of heights of boxes which are part of that sub-sequence.
 """
 
