@@ -14,15 +14,20 @@ Frankly, don't really know why it works!
 """
 
 
-def rearrange_array_elements(list_of_numbers):
+def rearrange_array_elements(arr):
 
-    n = len(list_of_numbers)
+    n = len(arr)
     for i in range(n):
-        list_of_numbers[i] += (list_of_numbers[list_of_numbers[i]] % n) * n
+        a = arr[i]
+        b = arr[arr[i]]
+        c = a + (b % n)*n
+        arr[i] = c
 
-    list_of_numbers = [x/n for x in list_of_numbers]
+    arr = [c / n for c in arr]
+    # To get back original array, do:
+    # arr = [c % n for c in arr]
 
-    return list_of_numbers
+    return arr
 
 
 class TestRearrangeArray(unittest.TestCase):
