@@ -33,7 +33,7 @@ def longest_span_with_same_sum(first_bin_array, second_bin_array):
     for j in range(end):
         first_prefix_sum += first_bin_array[j]
         second_prefix_sum += second_bin_array[j]
-        difference = end + (first_prefix_sum - second_prefix_sum)
+        difference = first_prefix_sum - second_prefix_sum
         if difference == 0:
             max_length = j+1
         if difference_list[difference] == -1:
