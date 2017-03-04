@@ -1,7 +1,7 @@
 import unittest
 """
 Given a binary array and an integer m, find the position of zeros flipping which creates the maximum
-number of consecutive 1s in the array.
+number of consecutive 1s in the array such that number of zeros is <= m.
 Input: 1 0 0 1 1 0 1 0 1 1 1
 Output: 5 7
 """
