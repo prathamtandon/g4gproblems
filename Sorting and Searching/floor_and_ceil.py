@@ -14,7 +14,7 @@ def floor_helper(arr, x, low, high):
         return arr[high]
     mid = low + (high - low) / 2
     if arr[mid] == x:
-        return arr[mid]
+        return x
     if mid > 0 and arr[mid - 1] <= x < arr[mid]:
         return arr[mid - 1]
     if arr[mid] > x:
