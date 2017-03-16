@@ -1,4 +1,5 @@
 import unittest
+from collections import deque
 """
 Given an array and an integer k, find the maximum for each and every contiguous subarray of size k.
 Input: 1 2 3 1 4 5 2 3 6, k = 3
@@ -18,32 +19,32 @@ Space complexity: O(k)
 
 
 def max_sliding_window(arr, k):
-    dq = []
+    dq = deque()
     n = len(arr)
     result = []
 
     # Process the first k items in arr
     for i in range(k):
         # Remove elements from dequeue smaller than current element
-        while len(dq) > 0 and arr[i] >= arr[dq[len(dq)-1]]:
-            dq.pop(len(dq)-1)
+        while len(dq) > 0 and arr[i] >= arr[dq[0]]:
+            dq.popleft()
         # Add current item at back of dequeue
-        dq.append(i)
+        dq.appendleft(i)
 
     # Process the remaining items
     for i in range(k, n):
         # Add element at front of dequeue to result
-        result.append(arr[dq[0]])
+        result.append(arr[dq[-1]])
         # Remove elements from front no longer in current window
-        while len(dq) > 0 and dq[0] <= i - k:
-            dq.pop(0)
+        while len(dq) > 0 and dq[-1] <= i - k:
+            dq.pop()
         # Remove elements from dequeue smaller than current element
-        while len(dq) > 0 and arr[i] >= arr[dq[len(dq)-1]]:
-            dq.pop(len(dq)-1)
+        while len(dq) > 0 and arr[i] >= arr[dq[0]]:
+            dq.popleft()
         # Add current item at back of dequeue
-        dq.append(i)
+        dq.appendleft(i)
 
-    result.append(arr[dq[0]])
+    result.append(arr[dq[-1]])
 
     return result
 
