@@ -29,14 +29,14 @@ def page_allocation(pages, M):
     if N < M:
         return -1
     total_pages = sum(pages)
-    start = 1
+    start = min(pages)
     end = total_pages
 
     while start <= end:
         mid = (start + end) / 2
         if assignment_possible(pages, M, mid):
             result = min(result, int(mid))
-            end -= 1
+            end = mid - 1
         else:
             start = mid + 1
 
