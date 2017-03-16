@@ -13,11 +13,13 @@ def digit_decodings(digits):
     # table[i] = number of decodings for digits[0:i]
     table = [0] * (n+1)
     table[0] = 1
+    table[1] = 1
 
-    for i in range(1, n+1):
-        for j in range(i-1, i-3, -1):
-            if j >= 0 and 1 <= int(digits[j:i]) <= 26:
-                table[i] += table[j]
+    for i in range(2, n+1):
+        if digits[i-1] > '0':
+            table[i] = table[i-1]
+        if digits[i-2] < '2' or digits[i-2] == '2' and digits[i-1] < '7':
+            table[i] += table[i-2]
 
     return table[n]
 
