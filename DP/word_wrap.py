@@ -65,7 +65,7 @@ if __name__ == '__main__':
                   'quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi '
                   'ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit '
                   'qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui '
-                  'dolorem eum fugiat quo voluptas nulla pariatur?'.split(' '))
+                  'dolorem eum fugiat quo voluptas nulla pariatur'.split(' '))
 
     word_wrap = memoize(word_wrap)
     print word_wrap(wlist, 0, 40)[0]
