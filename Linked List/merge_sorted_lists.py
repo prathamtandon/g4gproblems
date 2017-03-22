@@ -34,20 +34,15 @@ def merge_sorted_lists(LL1, LL2):
         LL2 = LL1
         LL1 = temp
 
-    prev = LL1
-    LL1 = LL1.next
-    while LL1 and LL2:
-        if LL1.data <= LL2.data:
-            prev = LL1
-            LL1 = LL1.next
-        else:
-            temp = LL2
-            LL2 = LL2.next
-            insert_between(prev, LL1, temp)
-            prev = temp
+    while LL1.next:
+        if LL1.next.data > LL2.data:
+            temp = LL1.next
+            LL1.next = LL2
+            LL2 = temp
+        LL1 = LL1.next
 
-    if LL1 is None:
-        prev.next = LL2
+    if LL1.next is None:
+        LL1.next = LL2
 
     return head
 
