@@ -20,7 +20,7 @@ def search(list, key):
     index = 1
     while list.elementAt(index) != -1 and list.elementAt(index) < key:
         index *= 2
-    return binary_search(list, key, index / 2, index)
+    return binary_search(list, index / 2, index, key)
 
 
 def binary_search(list, low, high, key):
