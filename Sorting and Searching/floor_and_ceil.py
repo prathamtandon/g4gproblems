@@ -25,16 +25,18 @@ def floor_helper(arr, x, low, high):
 
 def ceil_helper(arr, x, low, high):
 
-    while low < high:
-        mid = low + (high - low) / 2
-        if arr[mid] == x:
-            return x
-        elif arr[mid] < x:
-            low = mid + 1
-        else:
-            high = mid
-
-    return arr[high]
+    if low > high:
+        return -1
+    if x <= arr[low]:
+        return arr[low]
+    mid = low + (high - low) / 2
+    if arr[mid] == x:
+        return x
+    if mid < high and arr[mid] < x <= arr[mid + 1]:
+        return arr[mid + 1]
+    if arr[mid] < x:
+        return ceil_helper(arr, x, mid + 1, high)
+    return ceil_helper(arr, x, low, mid - 1)
 
 
 def floor(arr, x):
