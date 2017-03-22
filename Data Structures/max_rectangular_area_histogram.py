@@ -28,15 +28,13 @@ Note: Stack will store index of items, not actual heights.
 """
 
 
-def compute_area(height, right, left=None):
-    if left is None:
-        return height * right
+def compute_area(height, right, left):
     return height * (right-left-1)
 
 
 def max_area_histogram(heights):
     stack = []
-    max_so_far = -float('inf')
+    max_so_far = -1e7
 
     for i in range(len(heights)):
         # If this bar is taller than bar on top of stack, we push on stack.
@@ -49,14 +47,14 @@ def max_area_histogram(heights):
                 top = stack.pop(0)
                 # First argument is height, second argument is right edge of rectangle and third argument is
                 # left edge.
-                area = compute_area(heights[top], i, stack[0] if len(stack) > 0 else None)
+                area = compute_area(heights[top], i, stack[0] if len(stack) > 0 else 0)
                 max_so_far = max(max_so_far, area)
             stack.insert(0, i)
 
     # Repeat for any remaining bars.
     while len(stack) > 0:
         top = stack.pop(0)
-        area = compute_area(heights[top], len(heights), stack[0] if len(stack) > 0 else None)
+        area = compute_area(heights[top], len(heights), stack[0] if len(stack) > 0 else 0)
         max_so_far = max(max_so_far, area)
 
     return max_so_far
