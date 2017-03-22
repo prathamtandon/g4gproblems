@@ -9,6 +9,8 @@ Approach:
 2. The first part A[1...Lo-1] denotes where 0s are placed.
 3. The second part A[Lo...Mid-1] denotes where 1s are placed.
 4. The third part A[Mid...Hi] denotes where 2s are placed.
+In code below, lo refers to index where next 0 should come, mid refers to index where next 1 should come
+and hi refers to index where next 2 should come.
 """
 
 
