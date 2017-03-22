@@ -6,7 +6,7 @@ Input: 1 1 0 0 1 0 1 1 1 0 1 1 1
 Output: index 9
 Input: 1 1 1 1 0
 Output: index 4
-Input: 01010
+Input: 0 1 0 1 0
 Output: index 2
 """
 
