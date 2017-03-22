@@ -12,6 +12,8 @@ initially empty and never exceeding n items, takes O(k log n) worst-case time.
 Splay trees are designed to give especially fast access to entries that have
 been accessed recently, so they really excel in applications where a small
 fraction of the entries are the targets of most of the find operations.
+In other words, the search operation on keys is not uniformly distributed over all
+the keys. Instead, major percentage of search is focused on a very small fraction of overall keys.
 """
 
 
