@@ -22,17 +22,13 @@ def pairwise_swap(head):
 
     head = cur
 
-    while True:
+    while cur:
         temp = cur.next
         cur.next = prev
 
-        if not temp or not temp.next:
-            prev.next = temp
-            break
-
-        prev.next = temp.next
+        prev.next = temp.next if temp else None
         prev = temp
-        cur = prev.next
+        cur = prev.next if prev else None
 
     return head
 
