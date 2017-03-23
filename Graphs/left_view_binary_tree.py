@@ -22,7 +22,7 @@ class BinaryTree:
         return self.result
 
     def left_view_recursive(self, node, level):
-        if not Node:
+        if not node:
             return
 
         if self.max_level < level:
