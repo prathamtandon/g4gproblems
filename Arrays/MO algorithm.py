@@ -75,6 +75,7 @@ class MinimumOccurrence:
         return first.right < second.right
 
     def count_ranges(self):
+        self.ranges = sorted(self.ranges, cmp=self.range_comparator)
         current_l = 0
         current_r = 0
 
