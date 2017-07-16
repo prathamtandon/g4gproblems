@@ -8,17 +8,16 @@ import unittest
 
 def min_jumps_to_reach_end(jumps):
     n = len(jumps)
-    # Let costs[i] define the min jumps needed to reach arr[i] from start of array.
+    # Let costs[i] define the min jumps needed to reach from arr[i] to end of array.
     costs = [float('inf') for _ in range(n)]
-    costs[0] = 0
+    costs[n-1] = 0
 
-    for i in range(1, n):
-        for j in range(i):
-            if jumps[j] >= i-j:
-                costs[i] = min(costs[i], costs[j])
-        costs[i] += 1
+    for i in range(n-2, -1, -1):
+        for j in range(i+1, n):
+            if jumps[i] >= j-i:
+                costs[i] = min(costs[i], 1 + costs[j])
 
-    return costs[n-1]
+    return costs[0]
 
 
 class TestMinJumps(unittest.TestCase):
