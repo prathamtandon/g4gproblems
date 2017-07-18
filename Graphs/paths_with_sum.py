@@ -16,6 +16,7 @@ Approach:
    cannot be reached from any other node in the tree now, hence no need of keeping the path ending at it.
 """
 
+
 class Node:
     def __init__(self, key, left=None, right=None):
         self.key = key
