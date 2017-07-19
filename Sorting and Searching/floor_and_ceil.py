@@ -8,7 +8,7 @@ ceil(x) = smallest value in the array >= x
 
 def floor_helper(arr, x, low, high):
 
-    if low > high:
+    if low > high or arr[low] > x:
         return -1
     if x >= arr[high]:
         return arr[high]
@@ -16,8 +16,10 @@ def floor_helper(arr, x, low, high):
     if arr[mid] == x:
         return x
     # check if mid - 1 is floor
-    if mid > 0 and arr[mid - 1] <= x < arr[mid]:
+    if mid > low and arr[mid - 1] <= x < arr[mid]:
         return arr[mid - 1]
+    if mid < high and arr[mid] <= x < arr[mid + 1]:
+        return arr[mid]
     if arr[mid] > x:
         return floor_helper(arr, x, low, mid - 1)
     return floor_helper(arr, x, mid + 1, high)
