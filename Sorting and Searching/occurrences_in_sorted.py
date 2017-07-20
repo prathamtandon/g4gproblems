@@ -26,29 +26,31 @@ def count_occurrences(arr, x):
 
 
 def first_occurrence(arr, x, low, high):
-    if low > high:
-        return -1
-    if arr[low] == x:
-        return low
-    mid = (low + high) / 2
-    if mid > low and arr[mid] == x and arr[mid-1] != x:
-        return mid
-    if arr[mid] < x:
-        return first_occurrence(arr, x, mid+1, high)
-    return first_occurrence(arr, x, low, mid-1)
+    ans = -1
+    while low <= high:
+        mid = low + (high - low) / 2
+        if arr[mid] == x:
+            ans = mid
+            high = mid - 1
+        elif arr[mid] < x:
+            low = mid + 1
+        else:
+            high = mid - 1
+    return ans
 
 
 def last_occurrence(arr, x, low, high):
-    if low > high:
-        return -1
-    if arr[high] == x:
-        return high
-    mid = (low + high) / 2
-    if mid < high and arr[mid] == x and arr[mid+1] != x:
-        return mid
-    if arr[mid] > x:
-        return last_occurrence(arr, x, low, mid-1)
-    return last_occurrence(arr, x, mid+1, high)
+    ans = -1
+    while low <= high:
+        mid = low + (high - low) / 2
+        if arr[mid] == x:
+            ans = mid
+            low = mid + 1
+        elif arr[mid] < x:
+            low = mid + 1
+        else:
+            high = mid - 1
+    return ans
 
 
 class TestOccurrencesInSorted(unittest.TestCase):
