@@ -6,52 +6,32 @@ ceil(x) = smallest value in the array >= x
 """
 
 
-def floor_helper(arr, x, low, high):
-
-    if low > high or arr[low] > x:
-        return -1
-    if x >= arr[high]:
-        return arr[high]
-    mid = low + (high - low) / 2
-    if arr[mid] == x:
-        return x
-    # check if mid - 1 is floor
-    if mid > low and arr[mid - 1] <= x < arr[mid]:
-        return arr[mid - 1]
-    if mid < high and arr[mid] <= x < arr[mid + 1]:
-        return arr[mid]
-    if arr[mid] > x:
-        return floor_helper(arr, x, low, mid - 1)
-    return floor_helper(arr, x, mid + 1, high)
-
-
-def ceil_helper(arr, x, low, high):
-
-    if low > high:
-        return -1
-    if x <= arr[low]:
-        return arr[low]
-    mid = low + (high - low) / 2
-    if arr[mid] == x:
-        return x
-    if mid < high and arr[mid] < x <= arr[mid + 1]:
-        return arr[mid + 1]
-    if arr[mid] < x:
-        return ceil_helper(arr, x, mid + 1, high)
-    return ceil_helper(arr, x, low, mid - 1)
-
-
 def floor(arr, x):
+    if arr[0] > x:
+        return -1
     n = len(arr)
-    return floor_helper(arr, x, 0, n-1)
+    step = n
+    p = 0
+    while step >= 1:
+        # Travel left to right in steps n, n/2, n/4 etc.
+        while p + step < n and arr[p + step] <= x:
+            p += step
+        step /= 2
+    return arr[p]
 
 
 def ceil(arr, x):
     n = len(arr)
-    res = ceil_helper(arr, x, 0, n-1)
-    if res >= x:
-        return res
-    return -1
+    if arr[n-1] < x:
+        return -1
+    step = n
+    p = n+1
+    while step >= 1:
+        # Travel right to left in steps n, n/2, n/4 etc.
+        while p - step >= 0 and arr[p - step] >= x:
+            p -= step
+        step /= 2
+    return arr[p]
 
 
 class TestFloorCeil(unittest.TestCase):
