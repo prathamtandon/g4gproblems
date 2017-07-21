@@ -14,15 +14,29 @@ Approach:
 1. Idea is to use binary search to find the first occurrence of x, say, i.
 2. Then use binary search to find the last occurrence of x, say j.
 3. Return count as j-i+1.
+
+Implemented Approach:
+1. Use generalized binary search.
+2. First find p, such that arr[p] is largest integer which is not greater or equal to x.
+3. Next find q, such that arr[q] is largest integer which is not greater than x.
+4. Return q - p.
 """
 
 
 def count_occurrences(arr, x):
-    i = first_occurrence(arr, x, 0, len(arr)-1)
-    if i == -1:
-        return -1
-    j = last_occurrence(arr, x, i, len(arr)-1)
-    return j-i+1
+    n = len(arr)
+    p = 0
+    q = 0
+    step = n
+
+    while step >= 1:
+        while p + step < n and arr[p + step] < x:
+            p += step
+        while q + step < n and arr[q + step] <= x:
+            q += step
+        step /= 2
+
+    return q - p
 
 
 def first_occurrence(arr, x, low, high):
@@ -58,4 +72,4 @@ class TestOccurrencesInSorted(unittest.TestCase):
     def test_occurrences(self):
         arr = [1, 1, 2, 2, 2, 2, 3]
         self.assertEqual(count_occurrences(arr, 2), 4)
-        self.assertEqual(count_occurrences(arr, 4), -1)
+        self.assertEqual(count_occurrences(arr, 4), 0)
