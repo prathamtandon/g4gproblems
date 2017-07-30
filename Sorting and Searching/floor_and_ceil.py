@@ -25,7 +25,7 @@ def ceil(arr, x):
     if arr[n-1] < x:
         return -1
     step = n
-    p = n+1
+    p = 2*n-1
     while step >= 1:
         # Travel right to left in steps n, n/2, n/4 etc.
         while p - step >= 0 and arr[p - step] >= x:
