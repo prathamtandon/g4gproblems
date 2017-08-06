@@ -21,22 +21,23 @@ def absolute_distinct_count(sorted_list):
     count = 0
 
     while left <= right:
-        if prev_distinct is not None and abs(sorted_list[left]) == prev_distinct:
+        lval = abs(sorted_list[left])
+        rval = abs(sorted_list[right])
+        if lval == rval:
+            if prev_distinct is None or prev_distinct != lval:
+                prev_distinct = lval
+                count += 1
             left += 1
-        elif prev_distinct is not None and abs(sorted_list[right]) == prev_distinct:
             right -= 1
-        elif abs(sorted_list[left]) == abs(sorted_list[right]):
-            prev_distinct = abs(sorted_list[left])
-            count += 1
-            left += 1
-            right -= 1
-        elif abs(sorted_list[left]) > abs(sorted_list[right]):
-            prev_distinct = abs(sorted_list[left])
-            count += 1
+        elif lval > rval:
+            if prev_distinct is None or prev_distinct != lval:
+                prev_distinct = lval
+                count += 1
             left += 1
         else:
-            prev_distinct = abs(sorted_list[right])
-            count += 1
+            if prev_distinct is None or prev_distinct != rval:
+                prev_distinct = rval
+                count += 1
             right -= 1
 
     return count
