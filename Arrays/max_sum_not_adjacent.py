@@ -11,9 +11,14 @@ Output: 15 (3 + 5 + 7)
 """
 Approach:
 1. Similar to 0-1 Knapsack problem.
-2. F(S,i) = max(S[i] + F(S,i+2), F(S,i+1))
-3. That is, for every element either include it, in which case remaining elements start from 2 positions away
-    else exclude it, in which case remaining elements start from 1 position away.
+2. F(S,i) = max(S[i] + F(S,i+2), F(S,i+1), S[i])
+3. That is, for every element there are three cases:
+    (a) We add that element to previous best which is not adjacent
+    (b) We do not include the element in best subsequence, ie take adjacent best
+    (c) We start a new subsequence from the element
+
+dp[i] = max(dp[i-2] + x[i], dp[i-1], x[i])
+Finally, dp[n-1] will have the final answer.
 """
 
 """
