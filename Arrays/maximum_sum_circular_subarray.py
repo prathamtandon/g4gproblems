@@ -1,6 +1,6 @@
 import unittest
 """
-Given n numbers, both positive and negative, arranged in a circle, find the maximum of
+Given n numbers, both positive and negative, arranged in a circle, find the maximum sum of
 consecutive numbers.
 Input: 8 -8 9 -9 10 -11 12
 Output: 22 (12 8 -8 9 -9 10)
