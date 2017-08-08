@@ -29,23 +29,17 @@ def find_ceil_index(list_of_numbers, ele):
 
 
 def find_longest_increasing_subsequence_length(list_of_numbers):
-    tail_list = [0] * len(list_of_numbers)
-    tail_list[0] = list_of_numbers[0]
-    longest_length = 1
+    LCS = [list_of_numbers[0]]
 
     for i in range(1, len(list_of_numbers)):
         cur_ele = list_of_numbers[i]
-        if cur_ele < tail_list[0]:
-            tail_list[0] = cur_ele  # Case 1: Create a new active list
-        elif cur_ele > tail_list[longest_length-1]:
-            tail_list[longest_length] = cur_ele  # Case 2: Clone and extend
-            longest_length += 1
+        k = find_ceil_index(LCS, cur_ele)
+        if k == len(LCS) or LCS[k] < cur_ele:
+            LCS.append(cur_ele)
         else:
-            smallest_index_bigger_than_cur = \
-                find_ceil_index(tail_list[:longest_length], cur_ele)  # Case 3: Clone, extend and discard
-            tail_list[smallest_index_bigger_than_cur] = cur_ele
+            LCS[k] = cur_ele
 
-    return longest_length
+    return len(LCS)
 
 
 class TestLIS(unittest.TestCase):
