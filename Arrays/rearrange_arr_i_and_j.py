@@ -17,7 +17,7 @@ def rearrange_arr_i_and_j(list_of_numbers):
 
     for i in range(end):
         j = list_of_numbers[i] % end
-        list_of_numbers[j] += (i % end) * end
+        list_of_numbers[j] += i * end
 
     list_of_numbers = [x / end for x in list_of_numbers]
 
@@ -29,3 +29,5 @@ class TestRearrange(unittest.TestCase):
     def test_rearrange(self):
         list_of_numbers = [2, 0, 1, 4, 5, 3]
         self.assertEqual(rearrange_arr_i_and_j(list_of_numbers), [1, 2, 0, 5, 3, 4])
+        list_of_numbers = [1, 3, 0, 2]
+        self.assertEqual(rearrange_arr_i_and_j(list_of_numbers), [2, 0, 3, 1])
