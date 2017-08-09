@@ -17,9 +17,9 @@ Approach:
 def find_triplet_with_given_sum(list_of_numbers, target_sum):
     list_of_numbers = sorted(list_of_numbers)
     for i in range(len(list_of_numbers)):
-        for j in range(i, len(list_of_numbers)):
-            low = j
-            high = len(list_of_numbers) - 1
+        low = i+1
+        high = len(list_of_numbers)-1
+        while low < high:
             actual_sum = list_of_numbers[i] + list_of_numbers[low] + list_of_numbers[high]
             if actual_sum == target_sum:
                 return list_of_numbers[i], list_of_numbers[low], list_of_numbers[high]
@@ -27,7 +27,6 @@ def find_triplet_with_given_sum(list_of_numbers, target_sum):
                 low += 1
             else:
                 high -= 1
-
     return None
 
 
