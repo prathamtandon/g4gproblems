@@ -32,13 +32,13 @@ def find_two_odd_occurring_in_list(list_of_numbers):
     for number in list_of_numbers:
         xor_of_list ^= number
 
-    right_most_set_bit = xor_of_list & ~(xor_of_list - 1)
+    mask = xor_of_list & ~(xor_of_list - 1)
 
     missing_1 = 0
     missing_2 = 0
 
     for number in list_of_numbers:
-        if number & right_most_set_bit > 0:
+        if number & mask > 0:
             missing_1 ^= number
         else:
             missing_2 ^= number
