@@ -1,7 +1,7 @@
 import unittest
 """
 Given an array of integers arr, create a product array prod such that
-prod[i] = product of (arr[0...n-1] - arr[i]) without using division operator
+prod[i] = product of (arr[0...n-1] except arr[i]) without using division operator
 Input: 10 3 5 6 2
 Output: 180 600 360 300 900
 """
