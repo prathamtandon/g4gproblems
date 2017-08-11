@@ -14,14 +14,15 @@ class Node:
 def remove_duplicates(head):
     if head is None:
         return
-    current = head
-    while current.next:
-        if current.data == current.next.data:
-            next_next = current.next.next
-            current.next = None
-            current.next = next_next
+    prev = head
+    cur = head.next
+    while cur:
+        next = cur.next
+        if prev.data == cur.data:
+            prev.next = next
         else:
-            current = current.next
+            prev = cur
+        cur = next
 
     return head
 
