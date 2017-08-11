@@ -27,24 +27,23 @@ def merge_sorted_lists(LL1, LL2):
         return LL2
     if not LL2:
         return LL1
-    head = LL1 if LL1.data < LL2.data else LL2
-    # swap LL1 and LL2 if LL2 has first smaller item.
-    if head is not LL1:
-        temp = LL2
-        LL2 = LL1
-        LL1 = temp
 
-    while LL1.next:
-        if LL1.next.data > LL2.data:
-            temp = LL1.next
-            LL1.next = LL2
-            LL2 = temp
-        LL1 = LL1.next
+    result = LL1 if LL1.data < LL2.data else LL2
+    other = LL1 if result is LL2 else LL2
+    cur = result
 
-    if LL1.next is None:
-        LL1.next = LL2
+    while cur.next and other:
+            if cur.next.data > other.data:
+                    temp = other
+                    other = other.next
+                    temp.next = cur.next
+                    cur.next = temp
+            cur = cur.next
 
-    return head
+    if other:
+        cur.next = other
+
+    return result
 
 
 def insert_between(left, right, node):
