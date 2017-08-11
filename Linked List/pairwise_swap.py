@@ -17,20 +17,11 @@ def pairwise_swap(head):
     if not head or not head.next:
         return head
 
-    prev = head
-    cur = head.next
-
-    head = cur
-
-    while cur:
-        temp = cur.next
-        cur.next = prev
-
-        prev.next = temp.next if temp else None
-        prev = temp
-        cur = prev.next if prev else None
-
-    return head
+    temp = head.next
+    next = temp.next
+    temp.next = head
+    head.next = pairwise_swap(next)
+    return temp
 
 
 def print_ll(head):
@@ -47,8 +38,6 @@ if __name__ == '__main__':
     head.next = Node(2)
     head.next.next = Node(3)
     head.next.next.next = Node(4)
-    head.next.next.next.next = Node(5)
-    head.next.next.next.next.next = Node(6)
 
     print_ll(head)
     print_ll(pairwise_swap(head))
