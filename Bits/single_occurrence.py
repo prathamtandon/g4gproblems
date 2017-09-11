@@ -22,7 +22,7 @@ def get_single(arr):
                 sum += 1
         sum %= 3
         if sum == 1:
-            single += 2 ** i
+            single |= (1 << i)
 
     return single
 
