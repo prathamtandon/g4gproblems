@@ -34,11 +34,25 @@ def subset_sum(arr, sum):
     return table[sum][n]
 
 
+def subset_sum2(arr, sum):
+    n = len(arr)
+    table = [False] * (sum + 1)
+
+    table[0] = True
+
+    for i in range(n):
+        for j in range(sum, -1, -1):
+            if table[j] and j + arr[i] <= sum:
+                table[j + arr[i]] = True
+
+    return table[sum]
+
+
 class TestSubsetSum(unittest.TestCase):
 
     def test_subset_sum(self):
         arr = [3, 34, 4, 12, 5, 2]
         sum = 9
-        self.assertTrue(subset_sum(arr, sum))
+        self.assertTrue(subset_sum2(arr, sum))
         sum = 10000
-        self.assertFalse(subset_sum(arr, sum))
+        self.assertFalse(subset_sum2(arr, sum))
