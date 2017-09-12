@@ -2,7 +2,7 @@ import unittest
 """
 Given two sequences A and B, find out number of distinct subsequences in A which are equal to B.
 Input: A: rabbbit, B: rabbit
-Output: 2 [One subsequence which includes first b and one excludes first b]
+Output: 3 [One subsequence which includes first b and one excludes first b]
 """
 
 """
