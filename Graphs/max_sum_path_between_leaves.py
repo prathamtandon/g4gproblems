@@ -16,13 +16,25 @@ Approach:
 class BinaryTree:
 
     def max_sum_path_btw_leaves(self, node):
-        if node is None:
-            return 0, 0
+        if not node:
+            return -float('inf')
 
         lPath = self.max_sum_path_btw_leaves(node.left)
         rPath = self.max_sum_path_btw_leaves(node.right)
 
+        # compute sum of path between leaf nodes passing through this node
+        temp = 0
+        if node.left:
+            temp += lPath
+        if node.right:
+            temp += rPath
+        temp += node.data
+
         # static variable to track the overall result
-        BinaryTree.result = max(BinaryTree.result, node.data + lPath + rPath)
+        BinaryTree.result = max(BinaryTree.result, temp)
+
+        # compute maximum sum of path from this node to a leaf node.
+        if lPath == -float('inf') and rPath == -float('inf'):
+            return node.data
 
         return node.data + max(lPath, rPath)
