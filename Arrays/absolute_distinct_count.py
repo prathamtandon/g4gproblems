@@ -8,8 +8,11 @@ Output: 5
 
 """
 Approach:
-1. Scan using two pointers.
-2. Take care of duplicates and same absolute values.
+1. Initialize count as total number of elements in array.
+2. There can be two types of duplicates: same value and same sign OR same value and opposite sign.
+3. Have two pointers, left and right at the two ends of the array.
+4. For handling first type of duplicates, keep moving the pointers till values are same.
+5. For handling second type of duplicates, sum of arr[left] and arr[right] will be zero for such a pair.
 """
 
 
@@ -17,27 +20,29 @@ def absolute_distinct_count(sorted_list):
 
     left = 0
     right = len(sorted_list) - 1
-    prev_distinct = None
-    count = 0
+    count = len(sorted_list)
 
-    while left <= right:
-        lval = abs(sorted_list[left])
-        rval = abs(sorted_list[right])
-        if lval == rval:
-            if prev_distinct is None or prev_distinct != lval:
-                prev_distinct = lval
-                count += 1
+    while left < right:
+        # First type of duplicates:
+        while left != right and sorted_list[left] == sorted_list[left + 1]:
+            count -= 1
+            left += 1
+        while left != right and sorted_list[right] == sorted_list[right - 1]:
+            count -= 1
+            right -= 1
+
+        # break if only one element
+        if left == right:
+            break
+
+        # Second type of duplicate:
+        if sorted_list[left] + sorted_list[right] == 0:
+            count -= 1
             left += 1
             right -= 1
-        elif lval > rval:
-            if prev_distinct is None or prev_distinct != lval:
-                prev_distinct = lval
-                count += 1
+        elif sorted_list[left] + sorted_list[right] < 0:
             left += 1
         else:
-            if prev_distinct is None or prev_distinct != rval:
-                prev_distinct = rval
-                count += 1
             right -= 1
 
     return count
