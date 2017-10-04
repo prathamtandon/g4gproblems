@@ -36,6 +36,25 @@ def find_subarray_with_given_sum(list_of_numbers, sum):
     return None
 
 
+def find_subarray_with_given_sum_general(list_of_numbers, sum):
+    """
+    Note that list of numbers can contain negative numbers also.
+    """
+    map = {}
+    running_sum = 0
+    for i in xrange(len(list_of_numbers)):
+        running_sum += list_of_numbers[i]
+        if running_sum == sum:
+            print 'Found sum at: ' + str(0) + ',' + str(i)
+            return
+        if running_sum - sum in map:
+            print 'Found sum at: ' + str(map[running_sum - sum] + 1) + ',' + str(i)
+            return
+        map[running_sum] = i
+
+    print 'Sum not found'
+
+
 class TestSubarraySum(unittest.TestCase):
 
     def test_subarray_with_given_sum(self):
@@ -45,3 +64,7 @@ class TestSubarraySum(unittest.TestCase):
         self.assertEqual(find_subarray_with_given_sum(list_of_numbers, 23), (1, 4))
         list_of_numbers = [1, 4]
         self.assertIsNone(find_subarray_with_given_sum(list_of_numbers, 0))
+
+    def test_subarray_general(self):
+        list_of_numbers = [10, 2, -2, -20, 10]
+        find_subarray_with_given_sum_general(list_of_numbers, -10)
