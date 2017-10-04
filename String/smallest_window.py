@@ -39,13 +39,12 @@ def smallest_window(str, pat):
     for i in range(len(str)):
         str_count[ord(str[i])] += 1
 
-        if pat_count[ord(str[i])] > 0 and pat_count[ord(str[i])] >= str_count[ord(str[i])]:
+        if pat_count[ord(str[i])] >= str_count[ord(str[i])]:
             matches += 1
 
         if matches == pat_length:
             while pat_count[ord(str[w_left])] == 0 or str_count[ord(str[w_left])] > pat_count[ord(str[w_left])]:
-                if str_count[ord(str[w_left])] > pat_count[ord(str[w_left])]:
-                    str_count[ord(str[w_left])] -= 1
+                str_count[ord(str[w_left])] -= 1
                 w_left += 1
 
             cur_size = i - w_left + 1
@@ -69,6 +68,7 @@ class TestSmallestWindow(unittest.TestCase):
         self.assertEqual(smallest_window("xyz", ""), "")
         self.assertIsNone(smallest_window("xyz", "xyzzzzz"))
         self.assertIsNone(smallest_window("dbaac", "xyz"))
+        self.assertEqual(smallest_window("this is a test string", "tist"), "t stri")
 
 
 
