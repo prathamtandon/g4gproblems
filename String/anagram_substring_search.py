@@ -5,7 +5,7 @@ Input:
 txt: "ABAABA"
 pat: "BA"
 
-Output: 2 occurrences at indices: 0, 4
+Output: 4 occurrences at indices: 0, 1, 3, 4
 """
 
 
@@ -53,6 +53,6 @@ def search_anagrams(txt, pat):
 
 
 if __name__ == '__main__':
-    txt = 'BACDGABCDA'
-    pat = 'ABCD'
+    txt = 'ABAABA'
+    pat = 'BA'
     search_anagrams(txt, pat)
