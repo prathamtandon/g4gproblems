@@ -14,7 +14,7 @@ def peak_helper(arr, low, high):
         return max(arr[low], arr[high])
     mid = (low + high) / 2
     if arr[mid-1] <= arr[mid] >= arr[mid+1]:
-        return mid
+        return arr[mid]
     if arr[mid-1] > arr[mid]:
         return peak_helper(arr, low, mid - 1)
     return peak_helper(arr, mid + 1, high)
@@ -27,7 +27,7 @@ def valley_helper(arr, low, high):
         return min(arr[low], arr[high])
     mid = (low + high) / 2
     if arr[mid-1] >= arr[mid] <= arr[mid+1]:
-        return mid
+        return arr[mid]
     if arr[mid-1] < arr[mid]:
         return valley_helper(arr, low, mid-1)
     return valley_helper(arr, mid+1, high)
@@ -50,6 +50,8 @@ class TestPeak(unittest.TestCase):
         self.assertEqual(peak(arr), 4)
         arr = [10, 9, 8, 7, 6]
         self.assertEqual(peak(arr), 10)
+        arr = [2, 3, 4, 5, 8, 6]
+        self.assertEqual(peak(arr), 8)
 
     def test_valley(self):
         arr = [11, 10, 9, 15]
