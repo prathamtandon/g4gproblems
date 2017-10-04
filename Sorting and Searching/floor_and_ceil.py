@@ -7,31 +7,39 @@ ceil(x) = smallest value in the array >= x
 
 
 def floor(arr, x):
-    if arr[0] > x:
-        return -1
-    n = len(arr)
-    step = n
-    p = 0
-    while step >= 1:
-        # Travel left to right in steps n, n/2, n/4 etc.
-        while p + step < n and arr[p + step] <= x:
-            p += step
-        step /= 2
-    return arr[p]
+    low = 0
+    high = len(arr) - 1
+    ans = -1
+
+    while low <= high:
+        mid = (low + high) / 2
+        if arr[mid] == x:
+            return x
+        if arr[mid] < x:
+            ans = arr[mid]
+            low = mid + 1
+        else:
+            high = mid - 1
+
+    return ans
 
 
 def ceil(arr, x):
-    n = len(arr)
-    if arr[n-1] < x:
-        return -1
-    step = n
-    p = 2*n-1
-    while step >= 1:
-        # Travel right to left in steps n, n/2, n/4 etc.
-        while p - step >= 0 and arr[p - step] >= x:
-            p -= step
-        step /= 2
-    return arr[p]
+    low = 0
+    high = len(arr) - 1
+    ans = -1
+
+    while low <= high:
+        mid = (low + high) / 2
+        if arr[mid] == x:
+            return x
+        if arr[mid] > x:
+            ans = arr[mid]
+            high = mid - 1
+        else:
+            low = mid + 1
+
+    return ans
 
 
 class TestFloorCeil(unittest.TestCase):
