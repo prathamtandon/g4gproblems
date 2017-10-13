@@ -42,15 +42,19 @@ def max_sum_not_adjacent(list_of_numbers):
 
 
 def max_sum_not_adjacent_iterative(list_of_numbers):
-    sum_including_current = 0
-    sum_excluding_current = 0
+    # let excluding = Max sum excluding previous element
+    # and including = Max sum including previous element
+    # Then, max sum excluding current element = Max(excluding, including)
+    # And max sum including current element = excluding + arr[i]
+    including = list_of_numbers[0]
+    excluding = 0
 
-    for number in list_of_numbers:
-        new_sum_excluding_current = max(sum_including_current, sum_excluding_current)
-        sum_including_current = sum_excluding_current + number
-        sum_excluding_current = new_sum_excluding_current
+    for i in range(1, len(list_of_numbers)):
+        temp = max(including, excluding)
+        including = excluding + list_of_numbers[i]
+        excluding = temp
 
-    return max(sum_including_current, sum_excluding_current)
+    return max(including, excluding)
 
 
 class TestMaxSumNotAdjacent(unittest.TestCase):
