@@ -17,15 +17,17 @@ def find_ceil_index(list_of_numbers, ele):
     """
     low = 0
     high = len(list_of_numbers)-1
+    ans = -1
 
-    while high > low:
-        mid = low + (high - low) / 2
-        if list_of_numbers[mid] < ele:
-            low = mid + 1
+    while low <= high:
+        mid = (low + high) / 2
+        if list_of_numbers[mid] >= ele:
+            ans = mid
+            high = mid - 1
         else:
-            high = mid
+            low = mid + 1
 
-    return high
+    return ans
 
 
 def find_longest_increasing_subsequence_length(list_of_numbers):
@@ -34,7 +36,7 @@ def find_longest_increasing_subsequence_length(list_of_numbers):
     for i in range(1, len(list_of_numbers)):
         cur_ele = list_of_numbers[i]
         k = find_ceil_index(LCS, cur_ele)
-        if k == len(LCS) or LCS[k] < cur_ele:
+        if k == -1:
             LCS.append(cur_ele)
         else:
             LCS[k] = cur_ele
