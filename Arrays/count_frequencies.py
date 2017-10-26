@@ -25,7 +25,7 @@ def count_frequencies(list_of_numbers):
     end = len(list_of_numbers)
     divisor = end + 1
     for i in range(end):
-        index = (list_of_numbers[i]-1) % divisor
+        index = (list_of_numbers[i] % divisor) - 1
         list_of_numbers[index] += divisor
 
     counts = [x / divisor for x in list_of_numbers]
