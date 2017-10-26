@@ -15,10 +15,10 @@ Output: 6-8
 Approach:
 1. The idea is to use a min heap.
 2. First, create the min heap using first element of each of the k lists.
-3. Find the minimum (root of heap) and maximum elements among them and compute the range.
-4. Next, insert the next element from the list containing the current heap and recompute min, max and range if
+3. Find the minimum (root of heap) and maximum elements in the heap at any time and compute the range.
+4. Next, insert the next element from the list containing the current min and recompute min, max and range if
     needed.
-5. Break if any of the lists becomes empty of range has consecutive elements.
+5. Break if any of the lists becomes empty.
 """
 
 
