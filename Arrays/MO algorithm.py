@@ -69,9 +69,11 @@ class MinimumOccurrence:
         return result
 
     def range_comparator(self, first, second):
-        if first.left != second.left:
+        first_block = first.left / self.block_size
+        second_block = second.left / self.block_size
+        if first_block != second_block:
             # sort on block first
-            return first.left / self.block_size < second.left / self.block_size
+            return first_block < second_block
         return first.right < second.right
 
     def count_ranges(self):
