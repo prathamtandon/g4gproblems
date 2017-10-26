@@ -27,30 +27,23 @@ Approach:
 """
 
 
-def find_maximum_sum_subarray(list_of_numbers):
+def find_subarray(list_of_numbers, f):
+    so_far = list_of_numbers[0]
+    result = list_of_numbers[0]
 
-    max_so_far = -float('inf')
-    max_ending_here = 0
+    for i in range(1, len(list_of_numbers)):
+        so_far = f(so_far + list_of_numbers[i], list_of_numbers[i])
+        result = f(result, so_far)
 
-    for i in range(len(list_of_numbers)):
-        max_ending_here += list_of_numbers[i]
-        if max_ending_here < 0:
-            max_ending_here = 0
-        elif max_ending_here > max_so_far:
-            max_so_far = max_ending_here
-
-    return max_so_far
+    return result
 
 
 def find_maximum_sum_circular_subarray(list_of_numbers):
 
-    max_non_wrapped_sum = find_maximum_sum_subarray(list_of_numbers)
+    max_non_wrapped_sum = find_subarray(list_of_numbers, max)
     total_sum = sum(list_of_numbers)
-    list_of_numbers = [-x for x in list_of_numbers]
-
-    # wrapped_sum = total_sum - (-max subarray sum of inverted array)
-    max_wrapped_sum = total_sum + find_maximum_sum_subarray(list_of_numbers)
-    return max([max_non_wrapped_sum, max_wrapped_sum])
+    max_wrapped_sum = total_sum - find_subarray(list_of_numbers, min)
+    return max(max_non_wrapped_sum, max_wrapped_sum)
 
 
 class TestMaxSumCircularSubarray(unittest.TestCase):
