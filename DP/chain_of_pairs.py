@@ -24,11 +24,7 @@ def chain_of_pairs(pairs):
 
 
 def pair_comparator(pair1, pair2):
-    if pair1[0] < pair2[0]:
-        return -1
-    elif pair1[0] > pair2[0]:
-        return 1
-    return 0
+    return pair1[0] - pair2[0]
 
 
 class TestChainOfPairs(unittest.TestCase):
