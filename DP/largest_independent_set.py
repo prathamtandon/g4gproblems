@@ -22,6 +22,9 @@ def longest_independent_set(root):
         root.lis = 1
         return 1
 
+    if root.lis != 0:
+        return root.lis
+
     lis_excl = longest_independent_set(root.left) + longest_independent_set(root.right)
 
     lis_incl = 1
