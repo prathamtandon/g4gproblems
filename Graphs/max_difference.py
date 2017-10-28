@@ -38,17 +38,12 @@ class BinaryTree:
         left_min, left_max = self.max_min_in_subtree(node.left)
         right_min, right_max = self.max_min_in_subtree(node.right)
 
-        for value in [left_min, left_max, right_min, right_max]:
-            if self.is_finite(value):
-                self.update_max_difference(node.data, value)
+        if node.left:
+            self.max_difference = max(self.max_difference, node.data - left_min, node.data - left_max)
+        if node.right:
+            self.max_difference = max(self.max_difference, node.data - right_min, node.data - right_max)
 
         return min(node.data, left_min, right_min), max(node.data, left_max, right_max)
-
-    def update_max_difference(self, val1, val2):
-        self.max_difference = max(self.max_difference, val1 - val2)
-
-    def is_finite(self, value):
-        return value != float('inf') and value != -float('inf')
 
 
 class TestBinaryTree(unittest.TestCase):
