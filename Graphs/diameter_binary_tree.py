@@ -13,7 +13,6 @@ class Node:
         self.data = data
         self.left = left
         self.right = right
-        self.height_of_subtree = 0
 
 
 class BinaryTree:
@@ -21,21 +20,18 @@ class BinaryTree:
         self.root = root
 
     def diameter(self):
-        return self.diameter_of_subtree(self.root)
+        return self.diameter_of_subtree(self.root)[0]
 
     def diameter_of_subtree(self, node):
         if node is None:
-            return -float('inf')
+            return -float('inf'), 0
 
-        left_diameter = self.diameter_of_subtree(node.left)
-        right_diameter = self.diameter_of_subtree(node.right)
+        left_diameter, left_height = self.diameter_of_subtree(node.left)
+        right_diameter, right_height = self.diameter_of_subtree(node.right)
 
-        left_height = node.left.height_of_subtree if node.left else 0
-        right_height = node.right.height_of_subtree if node.right else 0
+        height = 1 + max(left_height, right_height)
 
-        node.height_of_subtree = 1 + max(left_height, right_height)
-
-        return max(left_diameter, right_diameter, 1 + left_height + right_height)
+        return max(left_diameter, right_diameter, 1 + left_height + right_height), height
 
 
 class TestBinaryTree(unittest.TestCase):
