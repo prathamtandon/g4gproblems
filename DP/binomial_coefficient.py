@@ -35,7 +35,23 @@ def binomial_coefficent(n, k):
     return C[n][k]
 
 
+def binomial_coefficient2(n, k):
+
+    # Since, C(n, k) = C(n, n - k)
+    if n - k < k:
+        k = n - k
+
+    res = 1
+
+    for i in range(k):
+        res *= (n - i)
+        res /= (i + 1)
+
+    return res
+
+
 class TestBinCoefficient(unittest.TestCase):
 
     def test_bin_coefficient(self):
         self.assertEqual(binomial_coefficent(4, 2), 6)
+        self.assertEqual(binomial_coefficient2(4, 2), 6)
