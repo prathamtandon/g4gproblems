@@ -4,6 +4,9 @@ Print all nodes at distance k from given node in a binary tree.
 
 
 def print_k_distance_down(node, k):
+    """
+    Prints all nodes at distance k from 'node' in subtree rooted at 'node'
+    """
     if not node or k < 0:
         return
     if k == 0:
@@ -14,7 +17,11 @@ def print_k_distance_down(node, k):
 
 
 def print_nodes_at_distance(node, target, k):
-    if not node:
+    """
+    Returns the distance between node and target. Returns -1 if target is not
+    found in subtree rooted at node.
+    """
+    if not node or k < 0:
         return -1
     if node is target:
         print_k_distance_down(node, k)
@@ -55,6 +62,6 @@ if __name__ == '__main__':
     root.left.right = Node(12)
     root.left.right.left = Node(10)
     root.left.right.right = Node(14)
-    print_nodes_at_distance(root, root.left.right, 2)
+    print_nodes_at_distance(root, root.left, 2)
 
 
